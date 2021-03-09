@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora imposto de Renda</title>
+</head>
+<body>
+<h1>Calculadora imposto de Renda</h1>
+
+Digite o salario: 
+<input type="number" id="sal">
+
+Calcular imposto de renda:
+<input type="button" value="Calcular" onclick="irpf()">
+<div id="res"></div>
+
+<script>
+/*
+até salario de 1.903,98 isento
+salario de 1.903,99 até 2.826,65 aliquota de 7,5
+salario de 2.826,66 até 3.751,05 aliquota de 15
+salario de 3.751,06 até 4.664,68 aliquota de 22,5
+salario de 4.664,68 27,6 
+
+*/
+
+
+function irpf(){
+var salario = document.getElementById('sal')
+var salf = Number(salario.value)
+var res = document.getElementById('res')
+
+if(salf <= 1903){ 
+    res.innerText = 'Isento'
+}else if(salf >= 1904 && salf <= 2826){
+    var salL = salf * 7.5
+    var salliq = salL/100
+    var salf = salf - salliq
+    var l1 = salf.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})
+    res.innerText = `aliquota de 7,5% - seu salário liquido e: ${l1}`
+
+}else if(salf >= 2827 && salf <= 3751){
+    var salL0 = salf * 15
+    var salliq0 = salL0/100
+    var salf = salf - salliq0
+    var l1 = salf.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})
+    res.innerText = `aliquota de 15% - seu salário liquido e: ${l1}`
+   // res.innerText = 'aliquota de 15%'  
+}else if(salf >= 3752 && salf <= 4664 ){
+    var salL = salf * 22.5
+    var salliq = salL/100
+    var salf = salf - salliq
+    var l1 = salf.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})
+    res.innerText = `aliquota de 22,5% - seu salário liquido e: ${l1}`
+   //res.innerText = 'aliquota de 22,5%'
+}else if(salf > 4665 ) {
+    var salL = salf * 27.6
+    var salliq = salL/100
+    var salf = salf - salliq
+    var l1 = salf.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})
+    res.innerText = `aliquota de 27,6% - seu salário liquido e: ${l1}`
+   // res.innerText = 'aliquota de 27,6'
+}
+
+}
+
+</script>
+</body>
+</html>
